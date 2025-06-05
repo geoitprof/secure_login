@@ -54,3 +54,11 @@ CREATE TABLE login_attempt_logs (
     success TINYINT(1) NOT NULL,
     attempt_time DATETIME NOT NULL
 );
+
+CREATE TABLE failed_login_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(45) DEFAULT NULL,
+    user_agent TEXT DEFAULT NULL,
+    attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
