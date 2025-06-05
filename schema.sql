@@ -22,3 +22,35 @@ CREATE TABLE user_sessions (
     logout_time DATETIME DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+CREATE TABLE login_attempts (
+    email VARCHAR(255) NOT NULL PRIMARY KEY,
+    attempts INT NOT NULL DEFAULT 0,
+    last_attempt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE failed_login_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(45),
+    user_agent VARCHAR(255)
+);
+
+CREATE TABLE failed_login_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent TEXT NOT NULL,
+    attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE login_attempt_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent TEXT NOT NULL,
+    success TINYINT(1) NOT NULL,
+    attempt_time DATETIME NOT NULL
+);
